@@ -1,4 +1,4 @@
-Use the following to run the site:
+Enter the following command to run the application:
 
 ```
 npm start
