@@ -6,3 +6,42 @@ body {
   font-family: sans-serif;
   padding: 0;
 }
+
+#main-box{
+  width: 800px;
+  height: 100px;
+}
+
+#unpause-button {
+  display: none;
+}
+
+#game-input {
+  height: 1px;
+  width: 1px;
+  position: absolute;
+  top: -20px;
+}
+
+.untyped-character {
+  color: gray;
+}
+
+.incorrect-character {
+  color: red;
+}
+
+.typed-character {
+  color: black;
+}
+
+.letter-jump {
+  animation: jump 0.05s ease-in-out;
+  position: relative;
+}
+
+@keyframes jump {
+  0% {top: 0}
+  50% {top:-7px}
+  100% {top: 0}
+}
