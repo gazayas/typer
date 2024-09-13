@@ -87,7 +87,11 @@ function TyperBox({ quotes }) {
   }
 
   function pauseLogic() {
-    document.getElementById("unpause-button").style.display = 'inline'
+    if (!gameStarted) {
+      reFocus()
+    } else {
+      document.getElementById("unpause-button").style.display = 'inline'
+    }
   }
 
   function reFocus() {
