@@ -62,6 +62,7 @@ function TyperBox({ quotes }) {
     if(!gameStarted && event["key"] == 'Enter') {
       setGameStarted(true)
       getNextQuote()
+      document.getElementById("quote-count").style.visibility = "visible"
     } else if (liveText.querySelector(".untyped-character") === null && event["key"] == 'Enter') {
       clearProgress()
       getNextQuote()
@@ -127,6 +128,7 @@ function TyperBox({ quotes }) {
         <div id="live-text"></div>
         <textarea id="game-input" onBlur={pauseLogic} onKeyDown={(event) => processKeyDown(event)} />
         <ProgressBar currentProgress={currentProgress} />
+        <div id="quote-count">Quote Count: {quoteCount}/{quotes ? quotes.length : 0}</div>
         <button id="unpause-button" onClick={reFocus}>unpause</button>
       </div>
     </>
