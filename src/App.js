@@ -17,7 +17,7 @@ export default function Typer() {
       return hash
     })
     shuffle(modifiedDummyData)
-    setQuotes(modifiedDummyData)
+    setQuotes(modifiedDummyData.slice(40)) // Only use 10 of 50 quotes for now.
 
     document.getElementById("live-text").innerHTML = "Press Enter to start"
   }
@@ -37,8 +37,15 @@ function TyperBox({ quotes }) {
   const liveText = document.getElementById("live-text")
 
   function getNextQuote() {
-    setQuoteCount(quoteCount + 1)
-    setQuote(quotes[quoteCount]["q"])
+    if (quotes[quoteCount] + 1) {
+      setQuoteCount(quoteCount + 1)
+      setQuote(quotes[quoteCount]["q"])
+    } else {
+      setGameStarted(false)
+      liveText.innerHTML = "You have cleared the game"
+      document.getElementById("progress-bar").style.display = "none"
+      return
+    }
 
     let chars = quote.split("")
     liveText.innerHTML = ""
@@ -107,7 +114,6 @@ function TyperBox({ quotes }) {
     const typedCharLength = document.getElementsByClassName("typed-character").length
     const totalLength = typedCharLength + document.getElementsByClassName("untyped-character").length
     const progress = typedCharLength / totalLength
-    console.log(progress * 100)
     setCurrentProgress(`${progress * 100}%`)
   }
 
