@@ -5,11 +5,21 @@
 body {
   font-family: sans-serif;
   padding: 0;
+  background-color: black;
 }
 
 #main-box{
+  color: white;
   width: 800px;
-  height: 100px;
+  margin: 0px auto;
+  margin-top: 40px;
+  padding: 30px;
+  padding-bottom: 40px;
+  border: 1px dashed white;
+}
+
+#live-text {
+  text-align: center;
 }
 
 #unpause-button {
@@ -24,7 +34,7 @@ body {
 }
 
 .untyped-character {
-  color: gray;
+  color: rgb(185, 185, 185);
 }
 
 .incorrect-character {
@@ -32,7 +42,7 @@ body {
 }
 
 .typed-character {
-  color: black;
+  color: white;
 }
 
 .letter-jump {
@@ -46,14 +56,24 @@ body {
   100% {top: 0}
 }
 
+#quote-count {
+  text-align: center;
+  margin-top: 50px;
+  visibility: hidden;
+}
+
 #progress-bar {
-  border: 1px solid black;
+  border: 1px solid white;
   width: 400px;
   height: 20px;
+  margin: 0px auto;
+  margin-top: 30px;
 }
 
 #progress-value {
   background-color: navy;
   width: 0%;
-  height: 20px;
+
+  /* To account for the parent element border */
+  height: 18px;
 }
