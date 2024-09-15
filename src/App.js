@@ -33,6 +33,7 @@ function TyperBox({ quotes }) {
   const [gameStarted, setGameStarted] = useState(false)
   const [quote, setQuote] = useState(startingQuotes[Math.floor(Math.random() * startingQuotes.length)])
   const [quoteCount, setQuoteCount] = useState(0)
+  const [currentProgress, setCurrentProgress] = useState(0)
   const liveText = document.getElementById("live-text")
 
   function getNextQuote() {
@@ -55,6 +56,7 @@ function TyperBox({ quotes }) {
       setGameStarted(true)
       getNextQuote()
     } else if (liveText.querySelector(".untyped-character") === null && event["key"] == 'Enter') {
+      clearProgress()
       getNextQuote()
     } else if (gameStarted) {
       if ((/[a-z|A-Z|\.',;| ]/).test(event["key"]) && event["key"].length === 1) {
@@ -66,6 +68,8 @@ function TyperBox({ quotes }) {
           if (event["key"] === ' ' && nextUntypedCharacterNode.style.backgroundColor === 'red') {
             nextUntypedCharacterNode.style.backgroundColor = null
           }
+
+          calculateProgress()
         } else {
           nextUntypedCharacterNode.classList.add("incorrect-character")
 
@@ -99,14 +103,36 @@ function TyperBox({ quotes }) {
     document.getElementById("unpause-button").style.display = 'none'
   }
 
+  function calculateProgress() {
+    const typedCharLength = document.getElementsByClassName("typed-character").length
+    const totalLength = typedCharLength + document.getElementsByClassName("untyped-character").length
+    const progress = typedCharLength / totalLength
+    console.log(progress * 100)
+    setCurrentProgress(`${progress * 100}%`)
+  }
+
+  function clearProgress() {
+    document.getElementById("progress-value").style.width = 0
+  }
+
   return (
     <>
       <div id="main-box">
         <div id="live-text"></div>
         <textarea id="game-input" onBlur={pauseLogic} onKeyDown={(event) => processKeyDown(event)} />
+        <ProgressBar currentProgress={currentProgress} />
         <button id="unpause-button" onClick={reFocus}>unpause</button>
       </div>
     </>
+  )
+}
+
+function ProgressBar({ currentProgress }) {
+
+  return (
+    <div id="progress-bar">
+      <div id="progress-value" style={{width: currentProgress}}></div>
+    </div>
   )
 }
 
